@@ -11,6 +11,7 @@ var connectionString = builder.Configuration.GetConnectionString(nameof(Db));
 builder.Services.AddDbContext<DbContext, Db>(options => options.UseSqlite(connectionString));
 
 builder.Services.AddScoped<IService<TagRequest, TagResponse>, TagService>();
+builder.Services.AddScoped<IService<PublisherRequest, PublisherResponse>, PublisherService>();
 
 builder.Services.AddControllersWithViews();
 
