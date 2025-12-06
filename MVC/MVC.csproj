@@ -8,9 +8,17 @@
 
   <ItemGroup>
     <Compile Remove="Templates\**" />
+    <Compile Remove="Views\Games\**" />
     <Content Remove="Templates\**" />
+    <Content Remove="Views\Games\**" />
     <EmbeddedResource Remove="Templates\**" />
+    <EmbeddedResource Remove="Views\Games\**" />
     <None Remove="Templates\**" />
+    <None Remove="Views\Games\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\GamesController.cs" />
   </ItemGroup>
 
   <ItemGroup>

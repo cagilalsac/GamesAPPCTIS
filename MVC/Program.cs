@@ -13,6 +13,9 @@ builder.Services.AddDbContext<DbContext, Db>(options => options.UseSqlite(connec
 builder.Services.AddScoped<IService<TagRequest, TagResponse>, TagService>();
 builder.Services.AddScoped<IService<PublisherRequest, PublisherResponse>, PublisherService>();
 
+builder.Services.AddScoped<IService<UserRequest, UserResponse>, UserService>();
+builder.Services.AddScoped<IService<RoleRequest, RoleResponse>, RoleService>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
