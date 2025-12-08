@@ -33,5 +33,7 @@ namespace APP.Models
         public string Tags { get; set; }
 
         public List<TagResponse> TagsResponse { get; set; }
+
+        public List<int> TagIds { get; set; }
     }
 }

@@ -12,6 +12,11 @@ namespace APP.Services
         {
         }
 
+        protected override IQueryable<Tag> Query(bool isNoTracking = true)
+        {
+            return base.Query(isNoTracking).Include(t => t.GameTags);
+        }
+
         public CommandResponse Create(TagRequest request)
         {
             if (Query().Any(t => t.Name == request.Name.Trim()))
@@ -29,6 +34,7 @@ namespace APP.Services
             var entity = Query(false).SingleOrDefault(t => t.Id == id);
             if (entity is null)
                 return Error("Tag not found!");
+            Delete(entity.GameTags);
             Delete(entity);
             return Success("Tag deleted successfully.", entity.Id);
         }

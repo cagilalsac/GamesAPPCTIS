@@ -42,26 +42,26 @@
     </div>
     <div class="row mb-3">
         <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.PriceF)
         </div>
         <div class="col-10">
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.PriceF)
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.ReleaseDate)
+            @Html.DisplayNameFor(model => model.ReleaseDateF)
         </div>
         <div class="col-10">
-            @Html.DisplayFor(model => model.ReleaseDate)
+            @Html.DisplayFor(model => model.ReleaseDateF)
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.IsTopSeller)
+            @Html.DisplayNameFor(model => model.IsTopSellerF)
         </div>
         <div class="col-10">
-            @Html.DisplayFor(model => model.IsTopSeller)
+            @Html.DisplayFor(model => model.IsTopSellerF)
         </div>
     </div>
     <div class="row mb-3">
@@ -75,16 +75,16 @@
 
 @* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. 
     Raw HTML Helper is used in case string parameter may have HTML tags. *@
-    @*
+    
     <div class="row mb-3">
         <div class="col-2 fw-bold">
-            <b>@Html.DisplayNameFor(model => model.Entitys)</b>
+            <b>@Html.DisplayNameFor(model => model.Tags)</b>
         </div>
         <div class="col-10">
-            @Html.Raw(Model.Entitys)
+            @Html.Raw(Model.Tags)
         </div>
     </div>
-    *@
+   
 
     <hr /> 
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>&nbsp;|&nbsp;

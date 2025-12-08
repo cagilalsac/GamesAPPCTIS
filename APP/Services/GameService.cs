@@ -31,7 +31,8 @@ namespace APP.Services
                 Price = request.Price,
                 PublisherId = request.PublisherId ?? 0,
                 ReleaseDate = request.ReleaseDate,
-                Title = request.Title.Trim()
+                Title = request.Title.Trim(),
+                TagIds = request.TagIds
             };
             Create(entity);
             return Success("Game created successfully.", entity.Id);
@@ -59,7 +60,8 @@ namespace APP.Services
                 Price = entity.Price,
                 PublisherId = entity.PublisherId,
                 ReleaseDate = entity.ReleaseDate,
-                Title = entity.Title
+                Title = entity.Title,
+                TagIds = entity.TagIds
             };
         }
 
@@ -88,6 +90,8 @@ namespace APP.Services
                     Id = entity.Publisher.Id,
                     Name = entity.Publisher.Name
                 },
+
+                TagIds = entity.TagIds,
 
                 Tags = string.Join("<br>", entity.GameTags.OrderBy(gt => gt.Tag.Name).Select(gt => gt.Tag.Name)),
                 TagsResponse = entity.GameTags.OrderBy(gt => gt.Tag.Name).Select(gt => new TagResponse
@@ -124,6 +128,8 @@ namespace APP.Services
                     Name = g.Publisher.Name
                 },
 
+                TagIds = g.TagIds,
+
                 Tags = string.Join("<br>", g.GameTags.OrderBy(gt => gt.Tag.Name).Select(gt => gt.Tag.Name)),
                 TagsResponse = g.GameTags.OrderBy(gt => gt.Tag.Name).Select(gt => new TagResponse
                 {
@@ -148,6 +154,7 @@ namespace APP.Services
             entity.PublisherId = request.PublisherId ?? 0;
             entity.ReleaseDate = request.ReleaseDate;
             entity.Title = request.Title.Trim();
+            entity.TagIds = request.TagIds;
             Update(entity);
             return Success("Game updated successfully.", entity.Id);
         }

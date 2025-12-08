@@ -20,5 +20,8 @@ namespace APP.Models
         [Required(ErrorMessage = "{0} is required!")]
         [DisplayName("Publisher")]
         public int? PublisherId { get; set; }
+
+        [DisplayName("Tags")]
+        public List<int> TagIds { get; set; } = new List<int>();
     }
 }

@@ -15,21 +15,21 @@ namespace MVC.Controllers
         private readonly IService<PublisherRequest, PublisherResponse> _publisherService;
 
         /* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. */
-        //private readonly IService<EntityRequest, EntityResponse> _EntityService;
+        private readonly IService<TagRequest, TagResponse> _tagService;
 
         public GamesController(
 			IService<GameRequest, GameResponse> gameService
             , IService<PublisherRequest, PublisherResponse> publisherService
 
             /* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. */
-            //, IService<EntityRequest, EntityResponse> EntityService
+            , IService<TagRequest, TagResponse> tagService
         )
         {
             _gameService = gameService;
             _publisherService = publisherService;
 
             /* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. */
-            //_EntityService = EntityService;
+            _tagService = tagService;
         }
 
         private void SetViewData()
@@ -41,9 +41,9 @@ namespace MVC.Controllers
 
             // Related items service logic to set ViewData (Id and Name parameters may need to be changed in the SelectList constructor according to the model):
             ViewData["PublisherId"] = new SelectList(_publisherService.List(), "Id", "Name");
-            
+
             /* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. */
-            //ViewBag.EntityIds = new MultiSelectList(_EntityService.List(), "Id", "Name");
+            ViewBag.TagIds = new MultiSelectList(_tagService.List(), "Id", "Name");
         }
 
         private void SetTempData(string message, string key = "Message")
