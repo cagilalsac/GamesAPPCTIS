@@ -2,6 +2,8 @@ using APP.Domain;
 using APP.Models;
 using APP.Services;
 using CORE.APP.Services;
+using CORE.APP.Services.Authentication.MVC;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,18 @@ builder.Services.AddScoped<IService<GameRequest, GameResponse>, GameService>();
 
 builder.Services.AddScoped<IService<UserRequest, UserResponse>, UserService>();
 builder.Services.AddScoped<IService<RoleRequest, RoleResponse>, RoleService>();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICookieAuthService, CookieAuthService>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login"; // changed from /Users/Login to /Login since route was changed for the action
+        options.AccessDeniedPath = "/Login"; // changed from /Users/Login to /Login since route was changed for the action
+        options.ExpireTimeSpan = TimeSpan.FromHours(1);
+        options.SlidingExpiration = true;
+    });
 
 builder.Services.AddControllersWithViews();
 
@@ -33,6 +47,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

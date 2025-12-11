@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CORE.APP.Services;
 using APP.Models;
+using APP.Services;
 
 // Generated from Custom MVC Template.
 
@@ -137,6 +138,36 @@ namespace MVC.Controllers
             var response = _userService.Delete(id);
             SetTempData(response.Message); // set TempData dictionary to carry the message to the redirected action's view
             return RedirectToAction(nameof(Index)); // redirect to the Index action
+        }
+
+        // GET: Login
+        [Route("~/[action]")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: Login
+        [HttpPost, ValidateAntiForgeryToken]
+        [Route("~/[action]")]
+        public async Task<IActionResult> Login(UserLoginRequest request)
+        {
+            if(ModelState.IsValid)
+            {
+                var response = await (_userService as UserService).Login(request);
+                if (response.IsSuccessful)
+                    return RedirectToAction("Index", "Home");
+                ModelState.AddModelError("", response.Message);
+            }
+            return View();
+        }
+
+        // GET: Logout
+        [Route("~/[action]")]
+        public async Task<IActionResult> Logout()
+        {
+            await (_userService as UserService).Logout();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
