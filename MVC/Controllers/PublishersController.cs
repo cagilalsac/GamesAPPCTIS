@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CORE.APP.Services;
 using APP.Models;
+using Microsoft.AspNetCore.Authorization;
 
 // Generated from Custom MVC Template.
 
 namespace MVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PublishersController : Controller
     {
         // Service injections:
@@ -52,6 +54,7 @@ namespace MVC.Controllers
         }
 
         // GET: Publishers
+        [AllowAnonymous]
         public IActionResult Index()
         {
             // Get collection service logic:

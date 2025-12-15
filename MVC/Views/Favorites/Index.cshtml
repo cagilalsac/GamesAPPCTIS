@@ -1,0 +1,19 @@
+﻿@model IEnumerable<FavoriteItem>
+
+<p><a asp-action="ClearFavorites">Clear</a></p>
+
+<table>
+    <tr>
+        <th>@Html.DisplayNameFor(m => m.GameName)</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.GameName
+            </td>
+            <td><a asp-action="RemoveFromFavorites" asp-route-gameId="@item.GameId">Remove from Favorites</a></td>
+        </tr>
+    }
+</table>

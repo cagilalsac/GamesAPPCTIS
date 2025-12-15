@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CORE.APP.Services;
 using APP.Models;
 using APP.Services;
+using Microsoft.AspNetCore.Authorization;
 
 // Generated from Custom MVC Template.
 
 namespace MVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         // Service injections:
@@ -53,6 +55,7 @@ namespace MVC.Controllers
         }
 
         // GET: Users
+        [AllowAnonymous]
         public IActionResult Index()
         {
             // Get collection service logic:
@@ -142,6 +145,7 @@ namespace MVC.Controllers
 
         // GET: Login
         [Route("~/[action]")]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
@@ -150,6 +154,7 @@ namespace MVC.Controllers
         // POST: Login
         [HttpPost, ValidateAntiForgeryToken]
         [Route("~/[action]")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(UserLoginRequest request)
         {
             if(ModelState.IsValid)
